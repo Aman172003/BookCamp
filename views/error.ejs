@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate')%>
+<!-- it is an error template -->
+<div class="row">
+    <div class="column">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><%=err.message%></h4>
+            <!-- err stack will only be shown when working in development environment -->
+            <% if(process.env.NODE_ENV !== "production") {%>
+                <p><%= err.stack %></p>
+            <% } %>
+        </div>  
+    </div>
+</div>
+
+
+
