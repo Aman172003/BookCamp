@@ -335,11 +335,20 @@ module.exports.updateCampground = async (req, res) => {
   const { id } = req.params;
   const campgroundData = req.body.campground;
 
+  const location = req.body.campground.location;
+  const geoData = await geocoder
+    .forwardGeocode({
+      query: location,
+      limit: 1,
+    })
+    .send();
+  const coordinates = geoData.body.features[0].geometry.coordinates;
+
   // Update campground in the Campground table
   await mySqlPool.query(
     `
     UPDATE Campground
-    SET title = ?, description = ?, location = ?, price = ?
+    SET title = ?, description = ?, location = ?, price = ?,  coordinates_x = ?,  coordinates_y = ?
     WHERE id = ?
   `,
     [
@@ -347,6 +356,8 @@ module.exports.updateCampground = async (req, res) => {
       campgroundData.description,
       campgroundData.location,
       campgroundData.price,
+      coordinates[0],
+      coordinates[1],
       id,
     ]
   );
