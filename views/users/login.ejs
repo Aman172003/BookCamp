@@ -1,6 +1,8 @@
 <% layout('layouts/boilerplate')%>
 
-<div class="container d-flex justify-content-center align-items-center mt-5">
+<link rel="stylesheet" href="/stylesheets/login.css" />
+
+<div class="container d-flex justify-content-center align-items-center mt-3">
   <div class="row">
     <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
       <div class="card shadow">
@@ -9,13 +11,15 @@
           alt=""
           class="card-img-top"
         />
-        <div class="card-body">
-          <h5 class="card-title">Login</h5>
+        <div class="card-body rounded-bottom">
+          <h5 class="card-title text-white-50">Login</h5>
           <form action="/login" method="POST" class="validated-form" novalidate>
             <div class="mb-3">
-              <label class="form-label" for="username">Username</label>
+              <label class="form-label text-white-50" for="username"
+                >Username</label
+              >
               <input
-                class="form-control"
+                class="form-control bg-transparent text-white-50"
                 type="text"
                 id="username"
                 name="username"
@@ -26,9 +30,11 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label" for="password">Password</label>
+              <label class="form-label text-white-50" for="password"
+                >Password</label
+              >
               <input
-                class="form-control"
+                class="form-control bg-transparent text-white-50"
                 type="password"
                 id="password"
                 name="password"
@@ -36,7 +42,7 @@
               />
               <div class="valid-feedback">Looks good!</div>
             </div>
-            <button class="btn btn-success w-100">Login</button>
+            <button class="btn btn-success w-100 text-white-50">Login</button>
           </form>
         </div>
       </div>

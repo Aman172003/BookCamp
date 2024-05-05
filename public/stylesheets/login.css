@@ -1,0 +1,20 @@
+body {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./login.jpeg");
+  background-size: cover;
+  background-position: center;
+  overflow-y: hidden;
+}
+
+.signup-container {
+  margin-top: -25px;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.card-body {
+  background-color: rgba(255, 255, 255, 0.3);
+}
