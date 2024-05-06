@@ -18,23 +18,17 @@ const path = require("path");
 const ejsMate = require("ejs-mate");
 const cors = require("cors");
 const ExpressError = require("./utils/ExpressError");
-const flash = require("connect-flash");
 const methodOverride = require("method-override");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
-
 const helmet = require("helmet");
 const mySqlPool = require("./db");
 
-// sql db
 mySqlPool
   .query("SELECT 1")
   .then(() => {
     console.log("MySql Db connected");
-    // app.listen(7000, () => {
-    //   console.log("Serving on port 7000");
-    // });
   })
   .catch((error) => {
     console.log(error);
@@ -42,14 +36,12 @@ mySqlPool
 
 const app = express();
 app.use(cors());
-
 // it tells the app to use ejs functionality
 app.engine("ejs", ejsMate);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(flash());
 // below middleware includes 11 middlewares in it
 // contentSecurityPolicy helps mitigate cross-site scripting attacks
 // isko use krne ke liye jo bhi photos ya maps humne use kiya hai uske source ko validate krna hoga

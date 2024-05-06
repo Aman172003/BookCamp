@@ -1,6 +1,8 @@
 <!-- this navbar is imported from documents -> component -> navbar -->
 <!-- some styling has been done by me -->
 
+<link rel="stylesheet" href="/stylesheets/navbar.css" />
+
 <script>
   fetch("/get-token")
     .then((response) => response.json())
@@ -16,21 +18,46 @@
     if (currentUser) {
       // User is logged in
       navbarLinks.innerHTML = `
-        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link text-white-50" href="/logout">Logout</a>
       `;
     } else {
       // User is not logged in
       navbarLinks.innerHTML = `
-        <a class="nav-link" href="/login">Login</a>
-        <a class="nav-link" href="/register">Register</a>
+        <a class="nav-link text-white-50" href="/login">Login</a>
+        <a class="nav-link text-white-50" href="/register">Register</a>
       `;
     }
   }
 </script>
 
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded event fired.");
+    const navbarLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+    console.log(navbarLinks);
+
+    navbarLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        console.log("Navbar link clicked.");
+        // Remove 'active' class from all navbar links
+        navbarLinks.forEach((navlink) => {
+          navlink.classList.remove("active");
+          navlink.classList.add("text-white-50");
+          console.log(navlink);
+        });
+        // Add 'active' class to the clicked link
+        this.classList.add("active");
+        this.classList.remove("text-white-50");
+        console.log(this);
+      });
+    });
+  });
+</script>
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-transparent">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">BookCamp</a>
+    <a class="navbar-brand text-white-50" href="#">BookCamp</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -44,9 +71,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/campgrounds">Campsites</a>
-        <a class="nav-link" href="/campgrounds/new">New Campsite</a>
+        <a class="nav-link text-white-50" href="/">Home</a>
+        <a class="nav-link active" href="/campgrounds">Campsites</a>
+        <a class="nav-link text-white-50" href="/campgrounds/new"
+          >New Campsite</a
+        >
       </div>
       <div class="navbar-nav ms-auto"></div>
     </div>

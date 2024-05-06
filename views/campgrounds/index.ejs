@@ -1,50 +1,35 @@
 <% layout('layouts/boilerplate')%>
-<!-- passes all below stuffs as a body into boilerplate.ejs file seperately-->
-
-<!-- injecting cluster map through cluster mapbox -->
+<link rel="stylesheet" href="/stylesheets/index.css" />
 <div id="cluster-map"></div>
 
-<h1>All Campsites</h1>
+<h1 class="text-white-50">All Campsites</h1>
 
 <% for(let campground of campgrounds) {%>
-<!-- In Bootstrap, a "card" is a flexible and extensible container that can be used to display various types of content, such as text, images, links, and more -->
-<div class="card mb-3">
-  <!-- the row class is used to create a horizontal grouping or container for a set of columns within the Bootstrap grid system -->
-  <div class="row">
-    <!-- the grid system is divided into 12 columns, and classes like col-md-4 are used to define how many columns an element should span on a particular screen size. -->
+<div class="card mb-4 bg-transparent text-white">
+  <div class="row no-gutters">
     <div class="col-md-4">
-      <!-- show the image if any image is there-->
       <% if (campground.image_url) { %>
-      <!-- img-fluid class makes an image responsive by automatically applying max-width: 100%; and height: auto; -->
       <img
-        crossorigin="anonymous"
-        class="img-fluid"
+        class="img-fluid rounded-left"
         alt=""
         src="<%= campground.image_url %>"
       />
       <% } else { %>
-      <!-- a default img src is given when no image is applied while adding campground -->
       <img
-        crossorigin="anonymous"
-        class="img-fluid"
+        class="img-fluid rounded-left"
         alt=""
         src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png"
       />
       <% } %>
     </div>
     <div class="col-md-8">
-      <!-- In Bootstrap, card-body is a class used to create the main content area within a Bootstrap card -->
       <div class="card-body">
-        <!-- card-title is a class used to style and format the title or heading of a card component. It's typically used within the card-body to create a visually distinct and prominent title for the content within the card. -->
         <h5 class="card-title"><%=campground.title%></h5>
-        <!-- card-text is a class used to style and format the main textual content within a card component. It's typically used within the card-body to style the primary text of the card.  -->
         <p class="card-text"><%=campground.description%></p>
         <p class="card-text">
-          <!-- the small element is used to define smaller text within a larger body of text, typically for indicating secondary or less important information. -->
           <small class="text-muted"><%=campground.location%></small>
         </p>
-        <!-- makes a primary button -->
-        <a class="btn btn-primary" href="/campgrounds/<%=campground.id%>%>"
+        <a class="btn btn-primary" href="/campgrounds/<%=campground.id%>"
           >View <%=campground.title%></a
         >
       </div>
@@ -54,7 +39,6 @@
 <%}%>
 <script>
   const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-  // below is done in a particular manner beacause cluster map required this in this particular format
   const campgrounds = {features: <%- JSON.stringify(campgrounds)%>}
 </script>
 <script src="/javascripts/clusterMap.js"></script>
