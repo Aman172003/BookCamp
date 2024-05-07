@@ -16,14 +16,15 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const ejsMate = require("ejs-mate");
-const cors = require("cors");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
-const helmet = require("helmet");
+const paymentRoutes = require("./routes/payment");
+const cors = require("cors");
 const mySqlPool = require("./db");
+require("dotenv").config();
 
 mySqlPool
   .query("SELECT 1")
@@ -36,63 +37,12 @@ mySqlPool
 
 const app = express();
 app.use(cors());
+
 // it tells the app to use ejs functionality
 app.engine("ejs", ejsMate);
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
-// below middleware includes 11 middlewares in it
-// contentSecurityPolicy helps mitigate cross-site scripting attacks
-// isko use krne ke liye jo bhi photos ya maps humne use kiya hai uske source ko validate krna hoga
-// tabhi wo maps aur photos humare website me dikhega nhi to unauthorized ho jaega
-app.use(helmet());
-
-// validating sources
-const scriptSrcUrls = [
-  "https://stackpath.bootstrapcdn.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://api.mapbox.com/",
-  "https://kit.fontawesome.com/",
-  "https://cdnjs.cloudflare.com/",
-  "https://cdn.jsdelivr.net",
-];
-const styleSrcUrls = [
-  "https://kit-free.fontawesome.com/",
-  "https://stackpath.bootstrapcdn.com/",
-  "https://api.mapbox.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://fonts.googleapis.com/",
-  "https://use.fontawesome.com/",
-];
-const connectSrcUrls = [
-  "https://api.mapbox.com/",
-  "https://a.tiles.mapbox.com/",
-  "https://b.tiles.mapbox.com/",
-  "https://events.mapbox.com/",
-];
-const fontSrcUrls = [];
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      connectSrc: ["'self'", ...connectSrcUrls],
-      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", "*"],
-      workerSrc: ["'self'", "blob:"],
-      objectSrc: [],
-      imgSrc: [
-        "'self'",
-        "blob:",
-        "data:",
-        // this should match my cloudinary account
-        "https://res.cloudinary.com/dwoqqbfk6/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
-        "https://images.unsplash.com/",
-      ],
-      fontSrc: ["'self'", ...fontSrcUrls],
-    },
-  })
-);
 
 // used for the req.body by the post
 app.use(express.urlencoded({ extended: false }));
@@ -105,6 +55,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", userRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/reviews", reviewRoutes);
+app.use("/", paymentRoutes);
 
 app.get("/", (req, res) => {
   const token = req.cookies.token;

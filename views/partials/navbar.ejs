@@ -4,6 +4,19 @@
 <link rel="stylesheet" href="/stylesheets/navbar.css" />
 
 <script>
+  // Get the current URL path
+  var path = window.location.pathname;
+
+  // Select the navigation link based on the current URL path
+  var navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  navLinks.forEach(function (link) {
+    if (link.getAttribute("href") === path) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+
   fetch("/get-token")
     .then((response) => response.json())
     .then((data) => {
@@ -14,50 +27,50 @@
     .catch((error) => console.error("Error:", error));
 
   function updateNavbar(currentUser) {
-    const navbarLinks = document.querySelector(".navbar-nav.ms-auto");
+    const navbarLinks = document.querySelectorAll(".navbar-nav .nav-link");
+    navbarLinks.forEach(function (link) {
+      // Check if the link href matches the current path
+      if (link.getAttribute("href") === window.location.pathname) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+
+    const authLinks = document.querySelector(".navbar-nav.ms-auto");
     if (currentUser) {
       // User is logged in
-      navbarLinks.innerHTML = `
-        <a class="nav-link text-white-50" href="/logout">Logout</a>
+      authLinks.innerHTML = `
+        <a class="nav-link" href="/logout">Logout</a>
       `;
     } else {
       // User is not logged in
-      navbarLinks.innerHTML = `
-        <a class="nav-link text-white-50" href="/login">Login</a>
-        <a class="nav-link text-white-50" href="/register">Register</a>
+      authLinks.innerHTML = `
+        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="/register">Register</a>
       `;
+      // Check if the login or register link matches the current path
+      const loginLink = authLinks.querySelector('a[href="/login"]');
+      const registerLink = authLinks.querySelector('a[href="/register"]');
+      if (window.location.pathname === "/login") {
+        loginLink.classList.add("active");
+      } else {
+        loginLink.classList.remove("active");
+      }
+      if (window.location.pathname === "/register") {
+        registerLink.classList.add("active");
+      } else {
+        registerLink.classList.remove("active");
+      }
     }
   }
 </script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOMContentLoaded event fired.");
-    const navbarLinks = document.querySelectorAll(".navbar-nav .nav-link");
-
-    console.log(navbarLinks);
-
-    navbarLinks.forEach((link) => {
-      link.addEventListener("click", function () {
-        console.log("Navbar link clicked.");
-        // Remove 'active' class from all navbar links
-        navbarLinks.forEach((navlink) => {
-          navlink.classList.remove("active");
-          navlink.classList.add("text-white-50");
-          console.log(navlink);
-        });
-        // Add 'active' class to the clicked link
-        this.classList.add("active");
-        this.classList.remove("text-white-50");
-        console.log(this);
-      });
-    });
-  });
-</script>
-
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-transparent">
   <div class="container-fluid">
-    <a class="navbar-brand text-white-50" href="#">BookCamp</a>
+    <a class="navbar-brand font-weight-bold text-black fw-medium" href="#"
+      >BookCamp</a
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -71,11 +84,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link text-white-50" href="/">Home</a>
-        <a class="nav-link active" href="/campgrounds">Campsites</a>
-        <a class="nav-link text-white-50" href="/campgrounds/new"
-          >New Campsite</a
-        >
+        <a class="nav-link fw-medium" href="/">Home</a>
+        <a class="nav-link fw-medium" href="/campgrounds">Campsites</a>
+        <a class="nav-link fw-medium" href="/campgrounds/new">New Campsite</a>
       </div>
       <div class="navbar-nav ms-auto"></div>
     </div>

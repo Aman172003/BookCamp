@@ -1,8 +1,10 @@
 body {
-  height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("./login.jpeg");
-  background-size: cover;
-  background-position: center;
+  background-color: #dddddd;
   /* background-color: #024950;  */
+}
+
+#cluster-map {
+  /* Set a fixed height for the map container */
+  border: 1px solid #ccc; /* Add border to map container */
+  border-radius: 10px; /* Rounded corners for map container */
 }

@@ -26,6 +26,7 @@ body {
 .nav-link.active {
   color: white;
   border-bottom-color: white;
+  font-weight: 800;
 }
 
 .btn-secondary,
