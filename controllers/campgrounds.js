@@ -64,7 +64,10 @@ module.exports.index = async (req, res) => {
     // Convert object values to an array of campgrounds
     const aggregatedCampgrounds = Object.values(campgroundMap);
     // Render the index page with the retrieved campgrounds
-    res.render("campgrounds/index", { campgrounds: aggregatedCampgrounds });
+    res.render("campgrounds/index", {
+      campgrounds: aggregatedCampgrounds,
+      user: req.user.username,
+    });
   } catch (error) {
     console.error("Error fetching campgrounds:", error);
     // Handle error appropriately, e.g., render an error page

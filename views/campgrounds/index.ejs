@@ -1,11 +1,14 @@
 <% layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/stylesheets/index.css" />
+
+<h1 class="salute" style="color: #35374b">Hey, <%= user %> 🙂</h1>
+
 <div id="cluster-map"></div>
 
-<h1 class="text-white-50">All Campsites</h1>
+<h1 style="color: #35374b" class="my-3">All Campsites🏕️</h1>
 
 <% for(let campground of campgrounds) {%>
-<div class="card mb-4 bg-transparent text-white">
+<div class="card mb-4">
   <div class="row no-gutters">
     <div class="col-md-4">
       <% if (campground.image_url) { %>
@@ -22,12 +25,12 @@
       />
       <% } %>
     </div>
-    <div class="col-md-8">
+    <div class="card-row col-md-8">
       <div class="card-body">
         <h5 class="card-title"><%=campground.title%></h5>
         <p class="card-text"><%=campground.description%></p>
         <p class="card-text">
-          <small class="text-muted"><%=campground.location%></small>
+          <small class="text-muted">📍 <%=campground.location%></small>
         </p>
         <a class="btn btn-primary" href="/campgrounds/<%=campground.id%>"
           >View <%=campground.title%></a

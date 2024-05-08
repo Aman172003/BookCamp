@@ -8,3 +8,26 @@ body {
   border: 1px solid #ccc; /* Add border to map container */
   border-radius: 10px; /* Rounded corners for map container */
 }
+
+.card {
+  border: none;
+  background-color: #f6f5f5;
+}
+
+img {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  min-height: 100%;
+}
+
+.salute {
+  margin-top: -30px;
+}
+
+.card-title {
+  font-size: 2rem;
+}
+
+.card-text {
+  font-size: 0.9rem;
+}

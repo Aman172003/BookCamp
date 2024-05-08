@@ -36,6 +36,7 @@ mySqlPool
   });
 
 const app = express();
+
 app.use(cors());
 
 // it tells the app to use ejs functionality

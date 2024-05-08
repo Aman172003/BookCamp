@@ -3,8 +3,8 @@ const map = new mapboxgl.Map({
   container: "cluster-map",
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: "mapbox://styles/mapbox/dark-v11",
-  center: [22.9734, 78.6569],
-  zoom: 3,
+  center: [80.321044921875, 26.460738043190887],
+  zoom: 1,
 });
 
 // to add zoomin zoomout and rotation features in map
@@ -80,6 +80,8 @@ map.on("load", () => {
     });
     const clusterId = features[0].properties.cluster_id;
 
+    console.log(e.features[0].geometry.coordinates);
+
     map
       .getSource("campgrounds")
       .getClusterExpansionZoom(clusterId, (err, zoom) => {
@@ -99,6 +101,7 @@ map.on("load", () => {
   map.on("click", "unclustered-point", (e) => {
     const { popUpMarkup } = e.features[0].properties;
     const coordinates = e.features[0].geometry.coordinates.slice();
+    console.log(e.features[0].geometry.coordinates);
 
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the

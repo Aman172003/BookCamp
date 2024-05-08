@@ -20,17 +20,24 @@ body {
   color: #333; /* Title text color */
 }
 
+.card,
+.list-group-item,
+.textfield {
+  background-color: #f6f5f5;
+}
+
 .card-text {
   color: #666; /* Text color */
 }
 
 .btn {
+  border: none;
   border-radius: 5px; /* Rounded corners for buttons */
   transition: background-color 0.3s ease; /* Smooth transition for button hover effect */
 }
 
-.btn:hover {
-  background-color: #007bff; /* Change background color on hover */
+.btn-danger:hover {
+  background-color: #fa7070; /* Change background color on hover */
   color: #fff; /* Text color on hover */
 }
 
@@ -38,6 +45,10 @@ body {
   border-radius: 5px; /* Rounded corners for form inputs */
 }
 
+.card-review {
+  border: none;
+  background-color: #eeeeee;
+}
 #map {
   height: 300px; /* Set a fixed height for the map container */
   border: 1px solid #ccc; /* Add border to map container */

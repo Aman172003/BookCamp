@@ -46,17 +46,17 @@
     <!-- below is copied from bootstrap card docs -->
     <div class="card mb-3">
       <div class="card-body">
-        <h5 class="card-title"><%=campground.title%></h5>
+        <h5 class="card-title fw-medium"><%=campground.title%></h5>
         <p class="card-text"><%=campground.description%></p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item text-muted bg-transparent">
-          <%=campground.location%>
+          📍<%=campground.location%>
         </li>
         <li class="list-group-item">
-          Submitted by <%=campground.author_username%>
+          Owned by <%=campground.author_username%>
         </li>
-        <li class="list-group-item">₹<%=campground.price%>/night</li>
+        <li class="list-group-item fw-medium">₹<%=campground.price%>/night</li>
       </ul>
 
       <!-- if the user owns the campground then only he/she allowed to edit or delete it -->
@@ -145,9 +145,9 @@
           <label for="first-rate5" title="Amazing">5 stars</label>
         </fieldset>
         <div class="mb-3">
-          <label class="form-label" for="body">Give a review: </label>
+          <label class="form-label fw-medium" for="body">Give a review: </label>
           <textarea
-            class="form-control"
+            class="textfield form-control"
             name="review[body]"
             id="body"
             cols="30"
@@ -161,14 +161,14 @@
     </div>
     <div class="p-2">
       <% } %> <% for(let review of campground.reviews) { %>
-      <div class="card mb-3">
+      <div class="card card-review mb-3">
         <div class="card-body">
-          <h5 class="card-title"><%= review.username %></h5>
+          <h5 class="card-title fw-medium"><%= review.username %></h5>
           <p class="starability-result" data-rating="<%=review.rating%>">
             Rated: <%= review.rating %> stars
           </p>
           <!-- <h6 class="card-subtitle mb-2 text-muted">By <%= review.username%></h6> -->
-          <p class="card-text">Review: <%= review.body %></p>
+          <p class="card-text fw-medium"><%= review.body %></p>
           <% if( currentUser && review.author_id == currentUserId) {%>
           <form
             action="/campgrounds/<%=campground.id%>/reviews/<%=review.id%>?_method=DELETE"
