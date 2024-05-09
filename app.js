@@ -24,6 +24,8 @@ const userRoutes = require("./routes/users");
 const paymentRoutes = require("./routes/payment");
 const cors = require("cors");
 const mySqlPool = require("./db");
+const favicon = require("serve-favicon");
+
 require("dotenv").config();
 
 mySqlPool
@@ -39,6 +41,9 @@ const app = express();
 
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, "public")));
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+
 // it tells the app to use ejs functionality
 app.engine("ejs", ejsMate);
 
@@ -50,8 +55,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(methodOverride("_method"));
-
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", userRoutes);
 app.use("/campgrounds", campgroundRoutes);

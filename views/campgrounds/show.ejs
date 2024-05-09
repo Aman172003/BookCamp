@@ -54,9 +54,11 @@
           📍<%=campground.location%>
         </li>
         <li class="list-group-item">
-          Owned by <%=campground.author_username%>
+          🏡 Owned by <%=campground.author_username%>
         </li>
-        <li class="list-group-item fw-medium">₹<%=campground.price%>/night</li>
+        <li class="list-group-item fw-medium">
+          💰 ₹<%=campground.price%>/night
+        </li>
       </ul>
 
       <!-- if the user owns the campground then only he/she allowed to edit or delete it -->
@@ -145,7 +147,9 @@
           <label for="first-rate5" title="Amazing">5 stars</label>
         </fieldset>
         <div class="mb-3">
-          <label class="form-label fw-medium" for="body">Give a review: </label>
+          <label class="form-label fw-medium" for="body"
+            >Give a review 📝:
+          </label>
           <textarea
             class="textfield form-control"
             name="review[body]"

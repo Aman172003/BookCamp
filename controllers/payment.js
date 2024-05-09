@@ -1,5 +1,6 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY_SECRET);
 require("dotenv").config();
+
 module.exports.createPayment = async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [
