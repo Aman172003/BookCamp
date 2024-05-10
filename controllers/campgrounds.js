@@ -37,6 +37,7 @@ module.exports.index = async (req, res) => {
       const popUpMarkup = `
         <strong><a href="/campgrounds/${id}">${title}</a></strong>
         <p>${description.substring(0, 20)}...</p>
+        <p>${price}/night</p>
       `;
 
       // If the campground is not in the map, add it

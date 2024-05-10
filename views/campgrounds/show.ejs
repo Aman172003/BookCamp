@@ -77,22 +77,93 @@
           <button class="btn btn-danger">Delete</button>
         </form>
       </div>
-      <% } %>
+      <% } %> <% if( currentUser && campground.author_id !== currentUserId) {%>
       <div class="card-footer text-body-secondary">
         <!-- <a class="text-decoration-none text-muted" href="/campgrounds"
           >All Campsites</a
         > -->
         <form action="/checkout" method="POST">
-          <button class="btn btn-success">Book</button>
+          <div class="mb-3">
+            <label for="checkInDate" class="form-label">Check-in Date</label>
+            <div class="input-group">
+              <span class="input-group-text bg-primary text-light">
+                <i class="bi bi-calendar3"></i>
+              </span>
+              <input
+                type="date"
+                id="checkInDate"
+                name="checkInDate"
+                class="form-control card-text"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Number of days to stay -->
+          <div class="mb-3">
+            <label for="checkOutDate" class="form-label">Check-out Date</label>
+            <div class="input-group">
+              <span class="input-group-text bg-primary text-light">
+                <i class="bi bi-calendar3"></i>
+              </span>
+              <input
+                type="date"
+                id="checkOutDate"
+                name="checkOutDate"
+                class="form-control card-text"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Number of campsites to book -->
+          <div class="mb-3">
+            <label for="numberOfCampsites" class="form-label"
+              >Number of Campsites to Book</label
+            >
+            <div class="input-group">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="subtractCampsites"
+              >
+                -
+              </button>
+              <input
+                id="numberOfCampsites"
+                name="numberOfCampsites"
+                class="form-control-sm text-center fw-medium card-text"
+                style="width: 70px"
+                value="1"
+                required
+              />
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="addCampsites"
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <div class="text-end">
+            <input
+              type="hidden"
+              name="campground_id"
+              value="<%= campground.id %>"
+            />
+            <button class="btn btn-success">Book</button>
+          </div>
         </form>
       </div>
+      <%} %>
     </div>
   </div>
   <div class="col-6">
     <div id="map"></div>
 
     <div class="mt-5 p-2">
-      <% if(currentUser){ %>
+      <% if(currentUser && campground.author_id !== currentUserId){ %>
       <h2>Leave a Review</h2>
       <form
         action="/campgrounds/<%=campground.id%>/reviews"
@@ -163,16 +234,21 @@
         <button class="btn btn-success">Submit</button>
       </form>
     </div>
+
     <div class="p-2">
-      <% } %> <% for(let review of campground.reviews) { %>
+      <% } else{ %>
+      <h2>Reviews from the Users👇🏻</h2>
+      <%}%> <% for(let review of campground.reviews) { %>
       <div class="card card-review mb-3">
         <div class="card-body">
-          <h5 class="card-title fw-medium"><%= review.username %></h5>
-          <p class="starability-result" data-rating="<%=review.rating%>">
-            Rated: <%= review.rating %> stars
-          </p>
+          <div class="reviewHead">
+            <h5 class="card-title fw-medium"><%= review.username %></h5>
+            <p class="starability-result" data-rating="<%=review.rating%>">
+              Rated: <%= review.rating %> stars
+            </p>
+          </div>
           <!-- <h6 class="card-subtitle mb-2 text-muted">By <%= review.username%></h6> -->
-          <p class="card-text fw-medium"><%= review.body %></p>
+          <p class="card-text"><%= review.body %></p>
           <% if( currentUser && review.author_id == currentUserId) {%>
           <form
             action="/campgrounds/<%=campground.id%>/reviews/<%=review.id%>?_method=DELETE"
@@ -195,3 +271,21 @@
 </script>
 
 <script src="/javascripts/showPageMap.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const subtractButton = document.getElementById("subtractCampsites");
+    const addButton = document.getElementById("addCampsites");
+    const campsitesInput = document.getElementById("numberOfCampsites");
+
+    subtractButton.addEventListener("click", function () {
+      if (campsitesInput.value > 1) {
+        campsitesInput.value--;
+      }
+    });
+
+    addButton.addEventListener("click", function () {
+      campsitesInput.value++;
+    });
+  });
+</script>

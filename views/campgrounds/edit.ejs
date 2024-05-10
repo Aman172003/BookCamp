@@ -1,7 +1,8 @@
 <%layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/edit.css" />
 <!-- passes all below stuffs as a body in boilerplate.ejs file seperately -->
 <div class="row">
-  <h1 class="text-center">Edit Campsite</h1>
+  <h1 class="text-center text-white-50">Edit Campsite</h1>
   <!-- offset-3 is a class that is used to create an empty space to the left of a column, effectively shifting the column to the right. -->
   <div class="col-md-6 offset-md-3">
     <form
@@ -12,13 +13,13 @@
       enctype="multipart/form-data"
     >
       <div class="mb-3">
-        <label class="form-label" for="title">Title</label>
+        <label class="form-label text-white-50" for="title">Title</label>
         <!-- form control -->
         <!-- It sets the width of form controls to 100% by default, making them fill the width of their container.
                     It provides a consistent border, padding, and margin for form controls.
                     It provides a variety of helper classes for sizing, disabling, and read-only form controls. -->
         <input
-          class="form-control"
+          class="form-control text-white-50 bg-transparent"
           type="text"
           id="title"
           name="campground[title]"
@@ -29,9 +30,9 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="location">Location</label>
+        <label class="form-label text-white-50" for="location">Location</label>
         <input
-          class="form-control"
+          class="form-control text-white-50 bg-transparent"
           type="text"
           id="location"
           name="campground[location]"
@@ -42,13 +43,19 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="price">Compound Price</label>
+        <label class="form-label text-white-50" for="price"
+          >Compound Price</label
+        >
         <!-- it is copied from input group in docs of bootstrap -->
         <div class="input-group">
-          <span class="input-group-text" id="price-label">₹</span>
+          <span
+            class="input-group-text text-white-50 bg-transparent"
+            id="price-label"
+            >₹</span
+          >
           <input
             type="text"
-            class="form-control"
+            class="form-control text-white-50 bg-transparent"
             id="price"
             placeholder="0.0"
             aria-label="Username"
@@ -62,9 +69,11 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="description">Description</label>
+        <label class="form-label text-white-50" for="description"
+          >Description</label
+        >
         <textarea
-          class="form-control"
+          class="form-control text-white-50 bg-transparent"
           type="text"
           id="description"
           name="campground[description]"
@@ -75,9 +84,9 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Add image(s)</label>
+        <label for="image" class="form-label text-white-50">Add image(s)</label>
         <input
-          class="form-control"
+          class="form-control text-white-50 bg-transparent"
           type="file"
           id="image"
           name="image"
@@ -87,7 +96,11 @@
 
       <div class="mb-3">
         <% campground.images.forEach(function(img, i) { %>
-        <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="" />
+        <img
+          src="<%= img.thumbnail %>"
+          class="img-thumbnail text-white-50"
+          alt=""
+        />
         <div class="form-check-inline">
           <input
             type="checkbox"
@@ -96,7 +109,7 @@
             value="<%=img.filename%>"
           />
         </div>
-        <label for="image-<%= i %>">Delete</label>
+        <label class="text-white-50" for="image-<%= i %>">Delete</label>
         <% }) %>
       </div>
 
@@ -104,6 +117,5 @@
         <button class="btn btn-info">Update Campsite</button>
       </div>
     </form>
-    <a href="/campgrounds/<%=campground.id%>">Back to Campsite</a>
   </div>
 </div>

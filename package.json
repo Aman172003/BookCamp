@@ -39,6 +39,7 @@
     "sanitize-html": "^2.11.0",
     "sequelize": "^6.37.3",
     "serve-favicon": "^2.5.0",
-    "stripe": "^15.5.0"
+    "stripe": "^15.5.0",
+    "toaster-js": "^2.2.3"
   }
 }

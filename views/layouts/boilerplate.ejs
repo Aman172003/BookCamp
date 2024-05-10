@@ -41,6 +41,11 @@
         font-family: "Teachers", sans-serif;
       }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/toaster-js/default.css" />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/toaster-js/umd.js"
+    ></script>
   </head>
   <!-- makes the body as flexible box -->
   <!-- flex container should arrange its children in a column direction -->
@@ -49,7 +54,6 @@
     <!-- used to include another ejs file here in same order -->
     <%- include('../partials/navbar')%>
     <main class="container mt-5">
-      <%- include('../partials/flash')%>
       <!-- all the sub ejs file are called as a body here -->
       <%- body %>
     </main>

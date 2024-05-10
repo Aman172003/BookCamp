@@ -3,6 +3,17 @@ body {
   /* background-color: #024950;  */
 }
 
+a {
+  text-decoration: none;
+  transition: ease-in-out;
+  transition-duration: 0.3s;
+  color: forestgreen;
+}
+
+a:hover {
+  color: lightseagreen;
+}
+
 #cluster-map {
   /* Set a fixed height for the map container */
   border: 1px solid #ccc; /* Add border to map container */
@@ -12,6 +23,12 @@ body {
 .card {
   border: none;
   background-color: #f6f5f5;
+  transition: transform 0.3s ease; /* Add smooth transition */
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Scale up the element on hover */
 }
 
 img {

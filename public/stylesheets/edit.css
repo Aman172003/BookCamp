@@ -1,0 +1,9 @@
+body {
+  height: 100%;
+  margin: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./edit.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
