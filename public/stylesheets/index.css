@@ -22,7 +22,7 @@ a:hover {
 
 .card {
   border: none;
-  background-color: #f6f5f5;
+  background-color: #eeeeee;
   transition: transform 0.3s ease; /* Add smooth transition */
   cursor: pointer;
 }
