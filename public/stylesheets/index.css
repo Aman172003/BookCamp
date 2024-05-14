@@ -20,6 +20,20 @@ a:hover {
   border-radius: 10px; /* Rounded corners for map container */
 }
 
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-head h6 {
+  margin-right: 15px;
+  background-color: #9dde8b;
+  border-radius: 5px;
+  padding: 6px;
+  color: #577B8D;
+}
+
 .card {
   border: none;
   background-color: #eeeeee;

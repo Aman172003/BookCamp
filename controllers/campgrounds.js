@@ -67,7 +67,8 @@ module.exports.index = async (req, res) => {
     // Render the index page with the retrieved campgrounds
     res.render("campgrounds/index", {
       campgrounds: aggregatedCampgrounds,
-      user: req.user.username,
+      username: req.user.username,
+      userId: req.user.id,
     });
   } catch (error) {
     console.error("Error fetching campgrounds:", error);
