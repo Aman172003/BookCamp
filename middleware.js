@@ -5,7 +5,11 @@ const mySqlPool = require("./db");
 module.exports.isLoggedIn = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
-    // req.flash("error", "You must be signed in first!");
+    res.cookie(
+      "flash",
+      { type: "error", message: "You must be signed in first!" },
+      { httpOnly: true }
+    );
     return res.redirect("/login");
   }
   try {
@@ -13,7 +17,11 @@ module.exports.isLoggedIn = (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    // req.flash("error", "Invalid token!");
+    res.cookie(
+      "flash",
+      { type: "error", message: "Invalid token!" },
+      { httpOnly: true }
+    );
     return res.redirect("/login");
   }
 };

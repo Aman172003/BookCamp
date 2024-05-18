@@ -132,12 +132,19 @@ module.exports.createCampground = async (req, res, next) => {
       return mySqlPool.query(insertImageQuery, insertImageValues);
     });
     await Promise.all(imageInsertQueries);
-    console.log("Successfully created a new campground");
+    res.cookie(
+      "flash",
+      { type: "success", message: "Successfully created a new campground" },
+      { httpOnly: true }
+    );
     res.redirect(`/campgrounds/${campgroundId}`);
   } catch (error) {
     console.error("Error creating campground:", error);
-    console.log("Failed to create campground");
-    // req.flash("error", "Failed to create campground");
+    res.cookie(
+      "flash",
+      { type: "error", message: "Failed to create campground" },
+      { httpOnly: true }
+    );
     res.redirect("back");
   }
 };
@@ -168,8 +175,12 @@ module.exports.showCampground = async (req, res) => {
     ]);
 
     if (campgroundRows.length === 0) {
-      // req.flash("error", "Cannot find the campground");
-      console.log("Cannot find the campground");
+      res.cookie(
+        "flash",
+        { type: "error", message: "Cannot find the campground" },
+        { httpOnly: true }
+      );
+
       return res.redirect("/campgrounds");
     }
 
@@ -269,8 +280,12 @@ module.exports.showCampground = async (req, res) => {
     });
   } catch (error) {
     console.error("Error retrieving campground:", error);
-    // req.flash("error", "Failed to retrieve campground");
-    console.log("Failed to retrieve campground");
+    res.cookie(
+      "flash",
+      { type: "error", message: "Failed to retrieve campground" },
+      { httpOnly: true }
+    );
+
     res.redirect("/campgrounds");
   }
 };
@@ -286,8 +301,12 @@ module.exports.renderEditForm = async (req, res) => {
     const [campgroundRows] = await mySqlPool.query(campgroundQuery, [id]);
 
     if (campgroundRows.length === 0) {
-      // req.flash("error", "Cannot find the campground");
-      console.log("Cannot find the campground");
+      res.cookie(
+        "flash",
+        { type: "error", message: "Cannot find the campground" },
+        { httpOnly: true }
+      );
+
       return res.redirect("/campgrounds");
     }
 
@@ -331,7 +350,11 @@ module.exports.renderEditForm = async (req, res) => {
     res.render("campgrounds/edit", { campground });
   } catch (error) {
     console.error("Error retrieving campground:", error);
-    // req.flash("error", "Failed to retrieve campground");
+    res.cookie(
+      "flash",
+      { type: "error", message: "Failed to retrieve campground" },
+      { httpOnly: true }
+    );
     res.redirect("/campgrounds");
   }
 };
@@ -393,8 +416,12 @@ module.exports.updateCampground = async (req, res) => {
       );
     }
   }
-  console.log("Successfully Updated campground");
-  // req.flash("success", "Successfully Updated campground");
+
+  res.cookie(
+    "flash",
+    { type: "success", message: "Successfully Updated campground" },
+    { httpOnly: true }
+  );
   res.redirect(`/campgrounds/${id}`);
 };
 
@@ -403,19 +430,26 @@ module.exports.deleteCampground = async (req, res) => {
   try {
     // Begin a transaction
     await mySqlPool.query("START TRANSACTION");
-
     await mySqlPool.query("DELETE FROM Image WHERE campground_id = ?", [id]);
     await mySqlPool.query("DELETE FROM Review WHERE campground_id = ?", [id]);
     await mySqlPool.query("DELETE FROM Campground WHERE id = ?", [id]);
 
-    console.log("Successfully deleted a campground");
+    res.cookie(
+      "flash",
+      { type: "success", message: "Successfully deleted a campground" },
+      { httpOnly: true }
+    );
 
     await mySqlPool.query("COMMIT");
 
     res.redirect("/campgrounds");
   } catch (error) {
     console.error("Error deleting campground:", error);
-    console.log("Error deleting campground");
+    res.cookie(
+      "flash",
+      { type: "error", message: "Error deleting campground" },
+      { httpOnly: true }
+    );
     // Rollback the transaction in case of an error
     await mySqlPool.query("ROLLBACK");
     res.redirect("/campgrounds");

@@ -1,5 +1,39 @@
-<% if (successMessage) { %>
-<div class="alert alert-success" role="alert"><%= successMessage %></div>
-<% } else if (errorMessage) { %>
-<div class="alert alert-danger" role="alert"><%= errorMessage %></div>
-<% } %>
+<% if (flash) { %> <% if (flash.type === "success") { %>
+<div id="alert" class="alert alert-success fixed-alert" role="alert">
+  <%= flash.message %>
+</div>
+<% } else { %>
+<div id="alert" class="alert alert-danger fixed-alert" role="alert">
+  <%= flash.message %>
+</div>
+<% } %> <% } %>
+
+<style>
+  .fixed-alert {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* Ensure it's on top of other elements */
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+  }
+
+  .fixed-alert.fade-out {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var alert = document.getElementById("alert");
+    if (alert) {
+      setTimeout(function () {
+        alert.classList.add("fade-out");
+        setTimeout(function () {
+          alert.remove();
+        }, 500); // match this timeout to the CSS transition duration
+      }, 3000); // Show the alert for 3 seconds
+    }
+  });
+</script>

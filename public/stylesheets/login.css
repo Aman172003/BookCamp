@@ -4,7 +4,6 @@ body {
     url("./login.jpeg");
   background-size: cover;
   background-position: center;
-  overflow-y: hidden;
 }
 
 .signup-container {

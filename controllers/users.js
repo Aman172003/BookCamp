@@ -13,18 +13,19 @@ module.exports.register = async (req, res) => {
   try {
     const { email, username, password } = req.body;
 
-    await mySqlPool.query(
+    const [results] = await mySqlPool.query(
       "SELECT email FROM User WHERE email = ?",
-      [email],
-      (error, results) => {
-        if (error) {
-          console.log(error);
-        }
-        if (results.length > 0) {
-          req.flash("error", "User already exists!");
-        }
-      }
+      [email]
     );
+
+    if (results.length > 0) {
+      res.cookie(
+        "flash",
+        { type: "error", message: "User already exists!" },
+        { httpOnly: true }
+      );
+      return res.redirect("back");
+    }
 
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
@@ -56,12 +57,19 @@ module.exports.register = async (req, res) => {
     };
 
     res.cookie("token", token, options);
-    console.log("Successfully Signed up!");
-    // req.flash("success", );
+    res.cookie(
+      "flash",
+      { type: "success", message: "Successfully Signed up!" },
+      { httpOnly: true }
+    );
     res.redirect("/campgrounds");
   } catch (error) {
     console.error("Error registering user:", error);
-    // req.flash("error", "Failed to register user");
+    res.cookie(
+      "flash",
+      { type: "error", message: "Failed to register user" },
+      { httpOnly: true }
+    );
 
     res.redirect("back");
   }
@@ -81,7 +89,11 @@ module.exports.login = async (req, res) => {
       [username]
     );
     if (userRows.length === 0) {
-      // req.flash("error", "Invalid username or password");
+      res.cookie(
+        "flash",
+        { type: "error", message: "Invalid username or password" },
+        { httpOnly: true }
+      );
       res.redirect("back");
       return;
     }
@@ -89,7 +101,11 @@ module.exports.login = async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       // Passwords don't match
-      // req.flash("error", "Invalid password");
+      res.cookie(
+        "flash",
+        { type: "error", message: "Invalid password" },
+        { httpOnly: true }
+      );
       res.redirect("back");
       return;
     }
@@ -109,13 +125,20 @@ module.exports.login = async (req, res) => {
 
     res.cookie("token", token, options);
 
-    // req.flash("success", "Welcome back!");
-    console.log("Successfully logged in!");
-    const redirectUrl = res.locals.returnTo || "/campgrounds"; // update this line to use res.locals.returnTo now
+    res.cookie(
+      "flash",
+      { type: "success", message: "Welcome back!" },
+      { httpOnly: true }
+    );
+    const redirectUrl = res.locals.returnTo || "/campgrounds";
     res.redirect(redirectUrl);
   } catch (error) {
     console.error("Error logging in:", error);
-    // req.flash("error", "Failed to log in");
+    res.cookie(
+      "flash",
+      { type: "error", message: "Failed to log in" },
+      { httpOnly: true }
+    );
     res.redirect("back");
   }
 };
@@ -123,6 +146,10 @@ module.exports.login = async (req, res) => {
 // logic for logging out
 module.exports.logout = (req, res, next) => {
   res.clearCookie("token");
-  // req.flash("success", "Goodbye!");
-  res.redirect("/campgrounds");
+  res.cookie(
+    "flash",
+    { type: "success", message: "Goodbye!" },
+    { httpOnly: true }
+  );
+  res.redirect("/login");
 };

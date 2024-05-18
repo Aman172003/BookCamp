@@ -11,7 +11,7 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
+const axios = require("axios");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -55,6 +55,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(methodOverride("_method"));
+
+app.use((req, res, next) => {
+  res.locals.flash = req.cookies.flash || null;
+  if (res.locals.flash) {
+    res.clearCookie("flash");
+  }
+  next();
+});
+
+// linked to api of flask
+app.get("/sentiment", (req, res) => {
+  // Make a GET request to the Flask API
+  axios
+    .get("http://127.0.0.1:5000/")
+    .then((response) => {
+      // Extract the data from the Flask API response
+      const apiResult = response.data;
+      // Send the API result back to the client
+      res.send(apiResult);
+    })
+    .catch((error) => {
+      // If there's an error, send an error message back to the client
+      console.error("Error:", error);
+      res.status(500).send("Error fetching data from the API");
+    });
+});
 
 app.use("/", userRoutes);
 app.use("/campgrounds", campgroundRoutes);

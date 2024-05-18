@@ -41,18 +41,13 @@
         font-family: "Teachers", sans-serif;
       }
     </style>
-    <link rel="stylesheet" href="https://unpkg.com/toaster-js/default.css" />
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/toaster-js/umd.js"
-    ></script>
   </head>
   <!-- makes the body as flexible box -->
   <!-- flex container should arrange its children in a column direction -->
   <!-- vh-100 sets the 100 view height units-->
   <body class="d-flex flex-column vh-100">
     <!-- used to include another ejs file here in same order -->
-    <%- include('../partials/navbar')%>
+    <%- include('../partials/navbar')%> <%- include('../partials/flash') %>
     <main class="container mt-5">
       <!-- all the sub ejs file are called as a body here -->
       <%- body %>
