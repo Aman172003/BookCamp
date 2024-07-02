@@ -32,11 +32,11 @@
 #### 👉🏻 User-Friendly Interface: Enjoy an intuitive interface designed for ease of use.
 #### 👉🏻 Secure Authentication: Register and log in securely with a username and password. New users can register themselves if they don't have credentials.
 #### 👉🏻 Campsite Management:
-        -> Owners can add new campsites to the platform.
-        -> Explore and book campsites from a comprehensive listing.
+   Owners can add new campsites to the platform.
+   Explore and book campsites from a comprehensive listing.
 #### 👉🏻 Interactive Community:
-        -> Users can comment on campsites to share experiences and insights. Commenters have the option to delete their comments.
+   Users can comment on campsites to share experiences and insights. Commenters have the option to delete their comments.
 #### 👉🏻 Owner Control:
-        -> Campsite owners can edit or delete their listings as needed.
+   Campsite owners can edit or delete their listings as needed.
 
 
