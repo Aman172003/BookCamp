@@ -12,10 +12,9 @@
 
 # All Campsites Page
 <img width="1440" alt="Screenshot 2024-07-03 at 3 18 08 AM" src="https://github.com/Aman172003/BookCamp/assets/98376634/5194e135-ab20-4b18-a449-da98491b2d1a">
+<img width="1440" alt="Screenshot 2024-07-03 at 3 18 38 AM" src="https://github.com/Aman172003/BookCamp/assets/98376634/cc5ce79c-b078-47d6-afd1-355acf7cca17">
 
 # About Campsite
-<img width="1440" alt="Screenshot 2024-07-03 at 3 20 02 AM" src="https://github.com/Aman172003/BookCamp/assets/98376634/b0f2f4d0-d5f1-40e1-a09d-01dbe93efe30">
-
 <img width="1440" alt="Screenshot 2024-07-03 at 3 20 23 AM" src="https://github.com/Aman172003/BookCamp/assets/98376634/670da9a8-6a92-425e-874a-c9458ed6640a">
 
 # Tech Stacks
