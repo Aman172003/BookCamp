@@ -15,3 +15,28 @@
 
 # About Campsite
 <img width="1440" alt="Screenshot 2024-07-03 at 3 20 23 AM" src="https://github.com/Aman172003/BookCamp/assets/98376634/670da9a8-6a92-425e-874a-c9458ed6640a">
+
+# Tech Stacks
+#### 👉🏻 Node.js
+#### 👉🏻 Express.js
+#### 👉🏻 Javascript
+#### 👉🏻 EJS(Embedded Javascript Template)
+#### 👉🏻 CSS
+#### 👉🏻 MySql
+#### 👉🏻 SQl
+#### 👉🏻 Stripe
+#### 👉🏻 JWT
+#### 👉🏻 Cloudinary
+
+# Features
+#### 👉🏻 User-Friendly Interface: Enjoy an intuitive interface designed for ease of use.
+#### 👉🏻 Secure Authentication: Register and log in securely with a username and password. New users can register themselves if they don't have credentials.
+#### 👉🏻 Campsite Management:
+        -> Owners can add new campsites to the platform.
+        -> Explore and book campsites from a comprehensive listing.
+#### 👉🏻 Interactive Community:
+        -> Users can comment on campsites to share experiences and insights. Commenters have the option to delete their comments.
+#### 👉🏻 Owner Control:
+        -> Campsite owners can edit or delete their listings as needed.
+
+
