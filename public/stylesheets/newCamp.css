@@ -1,7 +1,7 @@
 body {
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("./newCamp.jpeg");
+    url("https://res.cloudinary.com/dwoqqbfk6/image/upload/v1720690779/YelpCamp/newCamp-compressed_j9ydfv.jpg");
   background-size: cover;
   background-position: center;
 }

@@ -1,7 +1,7 @@
 body {
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("./login.jpeg");
+    url("https://res.cloudinary.com/dwoqqbfk6/image/upload/v1720691013/YelpCamp/login-compressed_kjdyqp.jpg");
   background-size: cover;
   background-position: center;
 }
